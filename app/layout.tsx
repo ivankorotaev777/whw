@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "BHPH Early Warning | Catch the Warning Signs Before They Become Charge-Offs",
   description: "AI-powered early warning system for Buy Here Pay Here dealers. Detect mechanical issues, job changes, and financial hardship before payments stop. Save accounts, preserve relationships, protect your portfolio.",
   keywords: ["BHPH", "Buy Here Pay Here", "auto dealer", "collections", "charge-off prevention", "AI", "early warning"],
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     title: "BHPH Early Warning | White Hat Way",
     description: "Catch the warning signs before they become charge-offs. AI-powered early detection for BHPH dealers.",

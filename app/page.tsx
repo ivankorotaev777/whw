@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,22 +21,30 @@ import {
   Zap,
 } from "lucide-react";
 import Link from "next/link";
+import Script from "next/script";
+
+const PRICING = {
+  starter: { monthly: 299, yearly: 2999 },
+  growth: { monthly: 499, yearly: 4999 },
+  portfolio: { monthly: 799, yearly: 7999 },
+} as const;
 
 export default function LandingPage() {
+  const [isYearly, setIsYearly] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                <Shield className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="text-lg font-semibold tracking-tight">
-                White Hat Way
-              </span>
-            </div>
+            <Link href="/" className="flex h-16 items-center shrink-0">
+              <img
+                src="/logo.png"
+                alt="White Hat Way"
+                className="h-full w-auto max-w-[200px] object-contain object-left"
+              />
+            </Link>
             <div className="hidden md:flex items-center gap-8">
               <Link
                 href="#problem"
@@ -62,9 +71,11 @@ export default function LandingPage() {
                 Pricing
               </Link>
             </div>
-            <Button size="sm" className="gap-2">
-              Start Free Pilot
-              <ArrowRight className="h-4 w-4" />
+            <Button asChild size="sm" className="gap-2">
+              <Link href="#form">
+                Get Started
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>
@@ -87,7 +98,7 @@ export default function LandingPage() {
               className="mb-6 px-4 py-1.5 text-sm border-accent/30 bg-accent/10 text-accent-foreground animate-fade-up"
             >
               <Sparkles className="h-3.5 w-3.5 mr-2 text-accent" />
-              2024 was the worst year on record for BHPH charge-offs
+              2026 was the worst year on record for BHPH charge-offs
             </Badge>
 
             {/* Main Headline */}
@@ -111,19 +122,20 @@ export default function LandingPage() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-up animation-delay-300">
               <Button
+                asChild
                 size="lg"
                 className="gap-2 px-8 py-6 text-base font-semibold animate-pulse-glow"
               >
-                Start Your Free 30-Day Pilot
-                <ArrowRight className="h-5 w-5" />
+                <Link href="#form">
+                  Get Started
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="gap-2 px-8 py-6 text-base"
-              >
-                Watch Demo
-                <ChevronRight className="h-5 w-5" />
+              <Button asChild variant="outline" size="lg" className="gap-2 px-8 py-6 text-base">
+                <Link href="#form">
+                  Watch Demo
+                  <ChevronRight className="h-5 w-5" />
+                </Link>
               </Button>
             </div>
 
@@ -131,7 +143,7 @@ export default function LandingPage() {
             <p className="text-sm text-muted-foreground animate-fade-up animation-delay-400">
               No contract. No credit card required.{" "}
               <span className="text-foreground">
-                Works with iDMS, DealerCenter, Wayne Reaves, and more.
+                Get early risk signals from your existing customer conversations.
               </span>
             </p>
           </div>
@@ -142,7 +154,7 @@ export default function LandingPage() {
               { value: "~21", label: "Avg Monthly Charge-offs", icon: TrendingDown },
               { value: "$16K", label: "Avg Receivable / Account", icon: DollarSign },
               { value: "$336K+", label: "Monthly $ at Risk", icon: AlertTriangle },
-              { value: "Worst", label: "2024 Industry Trend", icon: TrendingDown },
+              { value: "Worst", label: "2026 Industry Trend", icon: TrendingDown },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -162,7 +174,7 @@ export default function LandingPage() {
       </section>
 
       {/* Problem Section */}
-      <section id="problem" className="py-24 bg-muted/30">
+      <section id="problem" className="pt-12 pb-24 bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
@@ -232,7 +244,7 @@ export default function LandingPage() {
               <div className="relative">
                 <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-accent" />
                 <div className="bg-accent/10 border-2 border-accent/30 rounded-xl px-6 py-3 mt-2">
-                  <p className="text-sm font-semibold text-accent">
+                  <p className="text-sm font-semibold text-foreground">
                     You find out here → but the problem started 3 weeks ago
                   </p>
                 </div>
@@ -293,7 +305,7 @@ export default function LandingPage() {
                 <Zap className="h-6 w-6 text-accent" />
               </div>
               <p className="text-lg text-foreground text-left">
-                Your team isn&apos;t failing. <span className="text-accent font-bold">They&apos;re outnumbered.</span>
+                Your team isn&apos;t failing. <span className="text-foreground font-bold">They&apos;re outnumbered.</span>
               </p>
             </div>
           </div>
@@ -301,7 +313,7 @@ export default function LandingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section id="benefits" className="py-24">
+      <section id="benefits" className="pt-12 pb-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-6">
@@ -333,10 +345,11 @@ export default function LandingPage() {
                   in regularly — not collection calls, just touchpoints — and
                   listens for car trouble, job changes, financial stress.
                 </p>
-                <div className="mt-6 p-4 bg-muted/50 rounded-lg text-sm text-foreground">
-                  <span className="font-medium">&quot;Customer mentioned the check
+                <p className="mt-6 text-sm font-semibold text-foreground">AI Customer Advocate Reports:</p>
+                <div className="mt-2 p-4 bg-muted/50 rounded-lg text-sm text-foreground">
+                  <span className="font-medium">Customer mentioned the check
                   engine light has been on for two weeks. Payment due Friday.
-                  Recommend proactive outreach.&quot;</span>
+                  Recommend proactive outreach.</span>
                 </div>
               </CardContent>
             </Card>
@@ -356,15 +369,12 @@ export default function LandingPage() {
                   A single collector managing 150–300 accounts cannot stay on
                   top of every customer every week. It&apos;s not humanly
                   possible. Early Warning doesn&apos;t replace your collector —
-                  it makes them smarter.
+                  it makes them smarter.{" "}
+                  <span className="font-bold text-foreground">Allow your collector to focus on what&apos;s most important.</span>
                 </p>
-                <div className="mt-6 p-4 bg-muted/50 rounded-lg text-sm text-foreground">
-                  Instead of cold-calling through a list,{" "}
-                  <span className="font-medium">
-                    your collector starts every day with a prioritized alert
-                    digest
-                  </span>
-                  : accounts that need attention today, ranked by urgency.
+                <p className="mt-6 text-sm font-semibold text-foreground">AI Customer Advocate Prioritizes:</p>
+                <div className="mt-2 p-4 bg-muted/50 rounded-lg text-sm text-foreground">
+                  <span className="font-medium">Instead of cold-calling through a list, your collector starts every day with a prioritized alert digest: accounts that need attention today, ranked by urgency.</span>
                 </div>
               </CardContent>
             </Card>
@@ -385,12 +395,9 @@ export default function LandingPage() {
                   payments stop. Dealers who find out after the payment stops
                   have already lost the relationship.
                 </p>
-                <div className="mt-6 p-4 bg-muted/50 rounded-lg text-sm text-foreground">
-                  <span className="font-medium">
-                    Turn a potential charge-off into a loyalty moment
-                  </span>
-                  . Catch the mechanical complaint two weeks before the due date
-                  and bring the car in.
+                <p className="mt-6 text-sm font-semibold text-foreground">AI Customer Advocate Engages:</p>
+                <div className="mt-2 p-4 bg-muted/50 rounded-lg text-sm text-foreground">
+                  <span className="font-medium">Turn a potential charge-off into a loyalty moment. Catch the mechanical complaint two weeks before the due date and bring the car in.</span>
                 </div>
               </CardContent>
             </Card>
@@ -399,7 +406,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-muted/30">
+      <section className="pt-12 pb-24 bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-6">
@@ -425,7 +432,7 @@ export default function LandingPage() {
                   pilot, the system flagged a customer who mentioned she&apos;d lost
                   her job. I called her same day, worked out a hardship plan,
                   and she&apos;s been current ever since.{" "}
-                  <span className="font-semibold text-accent">
+                  <span className="font-semibold text-amber-700">
                     That account would have been a charge-off by month-end.
                   </span>
                   &quot;
@@ -451,7 +458,7 @@ export default function LandingPage() {
                 <blockquote className="text-foreground mb-6 leading-relaxed">
                   &quot;My collector was skeptical at first — she thought it was
                   going to replace her. Now she tells me it&apos;s{" "}
-                  <span className="font-semibold text-accent">
+                  <span className="font-semibold text-amber-700">
                     the best thing we&apos;ve ever put in the business
                   </span>
                   . She goes into every morning knowing which accounts need her
@@ -482,9 +489,8 @@ export default function LandingPage() {
                   issue, one was a job change, one was a guy who mentioned he
                   was thinking about letting the car go back. We saved all
                   three.{" "}
-                  <span className="font-semibold text-accent">
-                    That&apos;s $48,000 in receivables we would have lost. For $499 a
-                    month.
+                  <span className="font-semibold text-amber-700">
+                    That&apos;s $48,000 in receivables we would have lost. $799 a month.
                   </span>
                   &quot;
                 </blockquote>
@@ -492,7 +498,7 @@ export default function LandingPage() {
                 <div>
                   <div className="font-semibold">Tony M.</div>
                   <div className="text-sm text-muted-foreground">
-                    BHPH dealer, Texas • 175 active accounts
+                    BHPH dealer, Texas • 830 active accounts
                   </div>
                 </div>
               </CardContent>
@@ -502,7 +508,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-24">
+      <section id="how-it-works" className="pt-12 pb-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-6">
@@ -513,7 +519,7 @@ export default function LandingPage() {
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Here&apos;s exactly what you&apos;re getting — an AI-powered agent
-              purpose-built for Buy Here, Pay Here dealers.
+              purpose-built for Buy Here, Pay Here dealers, and certified for customer relations by WHW.
             </p>
           </div>
 
@@ -523,30 +529,24 @@ export default function LandingPage() {
               {[
                 {
                   step: "1",
-                  title: "Connect your DMS",
-                  desc: "Early Warning integrates with iDMS, DealerCenter, Wayne Reaves, DealerPack, AutoManager, and others via API or simple file import. Setup takes less than a day. No IT department required.",
-                  icon: Zap,
-                },
-                {
-                  step: "2",
                   title: "The agent contacts your customers",
                   desc: "On a configurable cadence — weekly or bi-weekly — the system sends a friendly, brief, branded text message to each active account. These are not collection messages. They are lightweight check-ins that give the customer an easy opening to share what's going on.",
                   icon: MessageSquare,
                 },
                 {
-                  step: "3",
+                  step: "2",
                   title: "The AI listens for risk signals",
                   desc: "Every response is analyzed for indicators of account risk: car trouble, job loss, financial hardship, ghosting risk, relocation, or dissatisfaction. The system is trained specifically on BHPH account failure patterns.",
                   icon: AlertTriangle,
                 },
                 {
-                  step: "4",
+                  step: "3",
                   title: "Your team gets a daily alert digest",
                   desc: "Each morning, your collector or manager sees a prioritized list of accounts that triggered a warning signal overnight, with context and recommended actions. No wading through a full portfolio list. Just the accounts that need you today.",
                   icon: Bell,
                 },
                 {
-                  step: "5",
+                  step: "4",
                   title: "Your team makes the call",
                   desc: "Early Warning does not negotiate, does not make demands, and does not attempt to resolve the account on its own. It surfaces the signal and hands it to your human team while the relationship is still intact. That's the White Hat Way.",
                   icon: Users,
@@ -590,7 +590,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 bg-muted/30">
+      <section id="pricing" className="pt-12 pb-24 bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-6">
@@ -607,6 +607,25 @@ export default function LandingPage() {
               . Most dealers in our pilot saved two to four accounts in their
               first 30 days.
             </p>
+
+            {/* Billing toggle */}
+            <div className="flex items-center justify-center gap-4 mt-10 mb-12">
+              <span className={`text-sm font-medium ${!isYearly ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={isYearly}
+                onClick={() => setIsYearly(!isYearly)}
+                className="relative inline-flex h-7 w-14 shrink-0 cursor-pointer items-center rounded-full border-2 border-border bg-muted transition-colors focus-visible:outline-none"
+                style={{ backgroundColor: isYearly ? "var(--accent)" : undefined }}
+              >
+                <span
+                  className="pointer-events-none block h-6 w-6 rounded-full border-2 border-accent bg-background shadow-lg transition-transform"
+                  style={{ transform: isYearly ? "translateX(28px)" : "translateX(2px)" }}
+                />
+              </button>
+              <span className={`text-sm font-medium ${isYearly ? "text-foreground" : "text-muted-foreground"}`}>Yearly</span>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -618,21 +637,25 @@ export default function LandingPage() {
                   Up to 150 accounts
                 </p>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold">$299</span>
-                  <span className="text-muted-foreground">/mo</span>
+                  <span className="text-4xl font-bold">${isYearly ? PRICING.starter.yearly : PRICING.starter.monthly}</span>
+                  <span className="text-muted-foreground">{isYearly ? "/yr" : "/mo"}</span>
+                  {isYearly && (
+                    <p className="mt-2 text-sm font-semibold text-amber-700">
+                      Save ${12 * PRICING.starter.monthly - PRICING.starter.yearly}/year
+                    </p>
+                  )}
                 </div>
                 <p className="text-sm text-muted-foreground mb-6">
                   Break-even: Save 1 account every 2 months
                 </p>
-                <Button variant="outline" className="w-full mb-6">
-                  Get Started
+                <Button asChild variant="outline" className="w-full mb-6">
+                  <Link href="#form">Get Started</Link>
                 </Button>
                 <ul className="space-y-3 text-sm">
                   {[
                     "Weekly or bi-weekly check-ins",
                     "Payment reminders",
                     "Daily alert digest",
-                    "DMS integration",
                     "TCPA compliance tools",
                     "Dashboard & reporting",
                     "Standard onboarding",
@@ -659,19 +682,25 @@ export default function LandingPage() {
                   150–300 accounts
                 </p>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold">$499</span>
-                  <span className="text-muted-foreground">/mo</span>
+                  <span className="text-4xl font-bold">${isYearly ? PRICING.growth.yearly : PRICING.growth.monthly}</span>
+                  <span className="text-muted-foreground">{isYearly ? "/yr" : "/mo"}</span>
+                  {isYearly && (
+                    <p className="mt-2 text-sm font-semibold text-amber-700">
+                      Save ${12 * PRICING.growth.monthly - PRICING.growth.yearly}/year
+                    </p>
+                  )}
                 </div>
                 <p className="text-sm text-muted-foreground mb-6">
                   Break-even: Save 1 account/month
                 </p>
-                <Button className="w-full mb-6">Get Started</Button>
+                <Button asChild className="w-full mb-6">
+                  <Link href="#form">Get Started</Link>
+                </Button>
                 <ul className="space-y-3 text-sm">
                   {[
                     "Weekly or bi-weekly check-ins",
                     "Payment reminders",
                     "Daily alert digest",
-                    "DMS integration",
                     "TCPA compliance tools",
                     "Dashboard & reporting",
                     "Priority onboarding",
@@ -693,21 +722,25 @@ export default function LandingPage() {
                   300–500 accounts
                 </p>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold">$799</span>
-                  <span className="text-muted-foreground">/mo</span>
+                  <span className="text-4xl font-bold">${isYearly ? PRICING.portfolio.yearly : PRICING.portfolio.monthly}</span>
+                  <span className="text-muted-foreground">{isYearly ? "/yr" : "/mo"}</span>
+                  {isYearly && (
+                    <p className="mt-2 text-sm font-semibold text-amber-700">
+                      Save ${12 * PRICING.portfolio.monthly - PRICING.portfolio.yearly}/year
+                    </p>
+                  )}
                 </div>
                 <p className="text-sm text-muted-foreground mb-6">
                   Break-even: Save 1–2 accounts/month
                 </p>
-                <Button variant="outline" className="w-full mb-6">
-                  Get Started
+                <Button asChild variant="outline" className="w-full mb-6">
+                  <Link href="#form">Get Started</Link>
                 </Button>
                 <ul className="space-y-3 text-sm">
                   {[
                     "Weekly or bi-weekly check-ins",
                     "Payment reminders",
                     "Daily alert digest",
-                    "DMS integration",
                     "TCPA compliance tools",
                     "Dashboard & reporting",
                     "White-glove onboarding",
@@ -722,13 +755,13 @@ export default function LandingPage() {
             </Card>
           </div>
 
-          {/* Founding Member Offer */}
+          {/* V8 Member Offer */}
           <div className="mt-16 max-w-3xl mx-auto">
             <Card className="bg-gradient-to-br from-primary/5 via-accent/5 to-chart-3/5 border-2 border-accent/30">
               <CardContent className="p-8 text-center">
                 <Badge className="bg-accent text-accent-foreground mb-4">
                   <Sparkles className="h-3.5 w-3.5 mr-1" />
-                  Founding Member Offer — First 20 Dealers Only
+                  V8 Member Offer
                 </Badge>
                 <h3 className="text-2xl font-bold mb-4">
                   Lock in{" "}
@@ -741,14 +774,12 @@ export default function LandingPage() {
                   onboarding, direct access to the product team, and your story
                   featured when we officially launch.
                 </p>
-                <Button size="lg" className="gap-2 animate-pulse-glow">
-                  Claim Your Founding Member Spot
-                  <ArrowRight className="h-5 w-5" />
+                <Button asChild size="lg" className="gap-2 animate-pulse-glow">
+                  <Link href="#form">
+                    Claim Your Founding Member Spot
+                    <ArrowRight className="h-5 w-5" />
+                  </Link>
                 </Button>
-                <p className="text-sm text-muted-foreground mt-4">
-                  Month-to-month. No long-term contract required. Cancel
-                  anytime.
-                </p>
               </CardContent>
             </Card>
           </div>
@@ -756,7 +787,7 @@ export default function LandingPage() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section id="form" className="pt-12 pb-24 relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.75_0.16_65_/_0.1)_0%,transparent_70%)]" />
         </div>
@@ -768,13 +799,16 @@ export default function LandingPage() {
           <p className="text-xl text-accent font-semibold mb-8">
             This tool catches those signals.
           </p>
-          <Button
-            size="lg"
-            className="gap-2 px-10 py-6 text-lg animate-pulse-glow"
-          >
-            Start Your Free 30-Day Pilot
-            <ArrowRight className="h-5 w-5" />
-          </Button>
+          <div className="rounded-xl border-2 border-border bg-muted/30 p-3">
+            <div
+              style={{ width: "100%", height: "250px" }}
+              data-fillout-id="2hiKqcED1hus"
+              data-fillout-embed-type="standard"
+              data-fillout-inherit-parameters
+              data-fillout-domain="form.latenode.com"
+            />
+          </div>
+          <Script src="https://server.fillout.com/embed/v1/" strategy="lazyOnload" />
         </div>
       </section>
 
@@ -782,12 +816,13 @@ export default function LandingPage() {
       <footer className="border-t border-border py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Shield className="h-4 w-4 text-primary-foreground" />
-              </div>
-              <span className="font-semibold">White Hat Way</span>
-            </div>
+            <Link href="/" className="flex items-center gap-2">
+              <img
+                src="/logo.png"
+                alt="White Hat Way"
+                className="h-32 w-32 object-contain"
+              />
+            </Link>
             <p className="text-sm text-muted-foreground text-center">
               BHPH Early Warning Agent — Technology that makes human
               relationships stronger.

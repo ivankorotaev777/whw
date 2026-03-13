@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   :root {
     /* Warm Navy/Slate with Amber accents - trustworthy, automotive feel */
     --background: 220 20% 97%;
