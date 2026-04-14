@@ -626,6 +626,9 @@ export default function LandingPage() {
               </button>
               <span className={`text-sm font-medium ${isYearly ? "text-foreground" : "text-muted-foreground"}`}>Yearly</span>
             </div>
+            <p className="text-sm font-medium text-muted-foreground -mt-6">
+              One-time setup fee: $250
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
