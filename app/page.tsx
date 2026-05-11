@@ -785,6 +785,9 @@ export default function LandingPage() {
                 </Button>
               </CardContent>
             </Card>
+            <p className="mt-6 text-center text-sm sm:text-base font-bold text-foreground">
+              Next WHW AI Price Assessment Set for July 1, 2026.
+            </p>
           </div>
         </div>
       </section>
